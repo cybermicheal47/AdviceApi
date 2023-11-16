@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import desktopdivider from "../images/pattern-divider-desktop.svg";
+import mobiledivider from "../images/pattern-divider-mobile.svg";
 import icondice from "../images/icon-dice.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,9 +47,15 @@ export const Advicecard = () => {
                 <p className="adviceid"> ADVICE #{adviceid}</p>
                 <p className="advice">{advice}</p>
 
-                <div className="dividerimg">
+                {/* <div className="dividerimg">
                   <img src={desktopdivider} alt="desktopdivider" />
-                </div>
+                </div> */}
+
+                <picture>
+                  <source media="(min-width: 394px)" srcSet={desktopdivider} />
+                  <source media="(max-width: 435px)" srcSet={mobiledivider} />
+                  <img src={mobiledivider} alt="Divider" />
+                </picture>
 
                 <div className="icondice">
                   <img src={icondice} alt="icondice" onClick={fetchadvice} />
