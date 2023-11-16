@@ -1,1 +1,1 @@
-# todoapp_react
+# Advice Generator React App
