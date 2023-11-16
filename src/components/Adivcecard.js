@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const Advicecard = () => {
   const [adviceid, setAdviceid] = useState("");
   const [advice, setAdvice] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const url = "https://api.adviceslip.com/advice";
   const fetchadvice = () => {
@@ -21,10 +22,11 @@ export const Advicecard = () => {
         // Work with the parsed JSON data here
         setAdviceid(data.slip.id);
         setAdvice(data.slip.advice);
-        console.log(data);
+        setLoading(false);
       })
       .catch((error) => {
         toast.error(`Error: ${error.message}`);
+        setLoading(false);
       });
   };
 
@@ -37,16 +39,22 @@ export const Advicecard = () => {
       <div className="container">
         <div className="card">
           <div className="cardContainer">
-            <p className="adviceid"> ADVICE #{adviceid}</p>
-            <p className="advice">{advice}</p>
+            {loading ? (
+              <p> LOADING....</p>
+            ) : (
+              <>
+                <p className="adviceid"> ADVICE #{adviceid}</p>
+                <p className="advice">{advice}</p>
 
-            <div className="dividerimg">
-              <img src={desktopdivider} alt="desktopdivider" />
-            </div>
+                <div className="dividerimg">
+                  <img src={desktopdivider} alt="desktopdivider" />
+                </div>
 
-            <div className="icondice">
-              <img src={icondice} alt="icondice" onClick={fetchadvice} />
-            </div>
+                <div className="icondice">
+                  <img src={icondice} alt="icondice" onClick={fetchadvice} />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
